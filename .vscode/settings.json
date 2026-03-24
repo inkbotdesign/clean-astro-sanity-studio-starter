@@ -2,7 +2,6 @@
   "workbench.colorTheme": "Neon City",
   "workbench.colorCustomizations": {
     "contrastBorder": "#FF1EFF",
-    "sideBar.border": "#FF1EFF",
     "focusBorder": "#00FF87",
     "notebook.cellBorderColor": "#C600C6"
   }

@@ -1,6 +1,6 @@
-# Astro + Tailwind + ESLint + Prettier Starter
+# Personal Website
 
-This repository is a reusable Astro starter template for quickly bootstrapping new projects with a clean frontend baseline.
+This repository currently serves as the working project for following the Astro + Sanity blog tutorial. Over time, it will evolve into my personal website.
 
 ## Included
 
@@ -14,7 +14,7 @@ This repository is a reusable Astro starter template for quickly bootstrapping n
 
 ## Current Structure
 
-This starter is intentionally lightweight. It includes:
+The project is still intentionally lightweight. It currently includes:
 
 - a minimal Astro page in `src/pages/`
 - a reusable layout in `src/layouts/BaseLayout.astro`
@@ -28,6 +28,12 @@ It does not yet include:
 - authentication
 - testing frameworks
 - deployment configuration
+
+## Direction
+
+The immediate goal is to complete the tutorial cleanly and understand the Astro setup before adding Sanity and blog functionality.
+
+After that, this project will gradually become my personal website.
 
 ## Scripts
 
@@ -78,10 +84,10 @@ bun run prettier:format
 - Use Conventional Commit syntax for commit messages.
 - Keep shared document markup in `BaseLayout`.
 - Keep formatter and linting configuration close to Astro defaults unless there is a clear project need.
-- Use Bun for dependency management and scripts in this starter.
+- Use Bun for dependency management and scripts in this project.
 
 Examples:
 
 - `feat: add blog post card component`
 - `fix: correct layout metadata handling`
-- `docs: update starter README`
+- `docs: update personal website README`
