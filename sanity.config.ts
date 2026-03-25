@@ -1,6 +1,7 @@
 // ./sanity.config.ts
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
+import { schemaTypes } from "./sanity/schemaTypes";
 
 const sanityProjectId = import.meta.env.PUBLIC_SANITY_PROJECT_ID;
 const sanityDataset = import.meta.env.PUBLIC_SANITY_DATASET;
@@ -10,6 +11,6 @@ export default defineConfig({
   dataset: sanityDataset,
   plugins: [structureTool()],
   schema: {
-    types: [],
+    types: schemaTypes,
   },
 });

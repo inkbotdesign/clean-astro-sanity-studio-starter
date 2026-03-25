@@ -2,6 +2,8 @@
 
 Astro starter template with an embedded Sanity Studio, Tailwind CSS v4, and Vercel-ready server output.
 
+This workspace is Bun-first. Use `bun install` and `bun run ...` for local development.
+
 ## Includes
 
 - Astro 6 with `output: "server"`
@@ -10,7 +12,7 @@ Astro starter template with an embedded Sanity Studio, Tailwind CSS v4, and Verc
 - React support for the embedded Studio
 - Tailwind CSS v4 via `@tailwindcss/vite`
 - ESLint and Prettier for Astro projects
-- Starter Sanity schema with `siteSettings` and `page`
+- Starter Sanity schema with `post`
 
 ## Quick Start
 
