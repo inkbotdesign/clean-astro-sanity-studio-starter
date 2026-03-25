@@ -1,5 +1,6 @@
 {
-  "name": "personal-website",
+  "name": "clean-astro-sanity-studio-starter",
+  "description": "Astro + Sanity starter with an embedded Studio and Vercel-ready server output.",
   "type": "module",
   "version": "0.0.1",
   "engines": {
