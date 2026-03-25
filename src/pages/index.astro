@@ -12,7 +12,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <section class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-end">
       <div class="space-y-6">
         <p
-          class="text-sm font-semibold uppercase tracking-[0.28em] text-emerald-300"
+          class="text-sm font-semibold tracking-[0.28em] text-emerald-300 uppercase"
         >
           Clean Starter
         </p>
@@ -26,8 +26,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           <p class="max-w-2xl text-lg leading-8 text-zinc-300">
             Use this repo as a starting point for content-driven Astro sites.
             The Sanity Studio lives at <code>/studio</code>, Tailwind is wired
-            in, and the starter ships with a minimal schema so the Studio is
-            useful on day one.
+            in, and the starter ships with a minimal <code>post</code> schema so the
+            Studio is useful on day one.
           </p>
         </div>
         <div class="flex flex-wrap gap-4">
@@ -54,10 +54,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           <li>Astro 6 server output with the Vercel adapter</li>
           <li>Embedded Studio at <code>/studio</code></li>
           <li>Tailwind CSS v4 via the Vite plugin</li>
-          <li>
-            Sanity starter schema with <code>siteSettings</code> and <code
-              >page</code>
-          </li>
+          <li>Bun-first scripts plus Astro, ESLint, and Prettier checks</li>
+          <li>Sanity starter schema with <code>post</code></li>
         </ul>
       </div>
     </section>
@@ -74,7 +72,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <p class="text-sm font-semibold text-white">2. Start the app</p>
         <p class="mt-3 text-sm leading-7 text-zinc-300">
           Run <code>bun run dev</code> and open both the site root and
-          <code>/studio</code>.
+          <code>/studio</code> in the same app.
         </p>
       </article>
       <article class="rounded-3xl border border-zinc-800 bg-zinc-900/50 p-6">
@@ -85,5 +83,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </p>
       </article>
     </section>
+
+    <footer class="border-t border-zinc-800 pt-6 text-sm text-zinc-400">
+      Released under the <a
+        class="text-zinc-200 underline underline-offset-4"
+        href="https://opensource.org/license/mit"
+        target="_blank"
+        rel="noreferrer">MIT License</a
+      >.
+    </footer>
   </main>
 </BaseLayout>
