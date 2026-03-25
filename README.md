@@ -49,15 +49,16 @@ bun run dev
 ## Starter Shape
 
 - `astro.config.mjs` configures Astro, Vercel, Tailwind, and the embedded Sanity Studio route.
-- `sanity.config.ts` configures the Studio workspace and uses the same env-backed Sanity project settings as the Astro integration.
-- `sanity/schemaTypes/` contains the starter document types.
+- `sanity.config.ts` configures the Studio workspace and uses the same Sanity env variable names as the Astro integration.
+- `sanity/schemaTypes/` contains optional starter document types you can wire into the Studio.
 - `src/pages/index.astro` is a minimal landing page that explains the starter setup.
 
 ## Sanity Notes
 
 - The embedded Studio is served by your Astro app. It is not a separate hosted Studio.
-- This starter uses a small schema so the Studio is useful immediately.
-- The Sanity project ID and dataset are loaded through a shared helper to keep the Astro app and Studio pointed at the same project.
+- The current Studio config is intentionally minimal. Add document types when you are ready to model content.
+- The Sanity project ID and dataset use one shared env contract by name: `PUBLIC_SANITY_PROJECT_ID` and `PUBLIC_SANITY_DATASET`.
+- The access API is intentionally different by runtime: `astro.config.mjs` uses `loadEnv(...)` for config-time server/runtime code, while `sanity.config.ts` uses `import.meta.env` to stay aligned with the embedded Studio's Vite runtime.
 
 ## Scripts
 

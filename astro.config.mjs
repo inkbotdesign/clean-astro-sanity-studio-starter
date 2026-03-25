@@ -5,6 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 import sanity from "@sanity/astro";
 import react from "@astrojs/react";
+import { requireEnv } from "./src/lib/env";
 
 import vercel from "@astrojs/vercel";
 
@@ -14,14 +15,23 @@ const { PUBLIC_SANITY_PROJECT_ID, PUBLIC_SANITY_DATASET } = loadEnv(
   "",
 );
 
+const sanityProjectId = requireEnv(
+  "PUBLIC_SANITY_PROJECT_ID",
+  PUBLIC_SANITY_PROJECT_ID,
+);
+const sanityDataset = requireEnv(
+  "PUBLIC_SANITY_DATASET",
+  PUBLIC_SANITY_DATASET,
+);
+
 // https://astro.build/config
 export default defineConfig({
   output: "server",
   adapter: vercel(),
   integrations: [
     sanity({
-      projectId: PUBLIC_SANITY_PROJECT_ID,
-      dataset: PUBLIC_SANITY_DATASET,
+      projectId: sanityProjectId,
+      dataset: sanityDataset,
       useCdn: false,
       apiVersion: "2025-01-28",
       studioBasePath: "/studio",
@@ -29,8 +39,6 @@ export default defineConfig({
     react(),
   ],
   vite: {
-    // @ts-expect-error Astro validates against its bundled Vite types, but
-    // @tailwindcss/vite returns plugin types from the workspace Vite package.
     plugins: [tailwindcss()],
   },
 });
