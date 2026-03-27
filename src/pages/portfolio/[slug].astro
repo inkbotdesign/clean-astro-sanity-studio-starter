@@ -1,0 +1,41 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { sanityClient } from "../../lib/sanity";
+
+const { slug } = Astro.params;
+const item = await sanityClient.fetch(`*[_type == "portfolioItem" && slug.current == $slug][0]{
+  title,
+  clientName,
+  category,
+  summary,
+  coverImage,
+  overview,
+  caseStudy-> { title, slug },
+}`, { slug });
+
+if (!item) {
+  throw new Error(`Portfolio item not found: ${slug}`);
+}
+---
+
+<BaseLayout title={`${item.title} — Inkbot Portfolio`} description={item.summary}>
+  <main class="container mx-auto py-20 px-4 sm:px-6">
+    <article>
+      <h1 class="text-5xl font-bold text-white">{item.title}</h1>
+      <p class="mt-2 text-lg text-emerald-300">{item.clientName} · {item.category}</p>
+      {item.coverImage?.asset?._ref ? (
+        <img src={`https://cdn.sanity.io/images/${import.meta.env.PUBLIC_SANITY_PROJECT_ID}/${import.meta.env.PUBLIC_SANITY_DATASET}/${item.coverImage.asset._ref}`} alt={item.title} class="mt-8 w-full rounded-xl object-cover" />
+      ) : null}
+
+      <section class="mt-10 prose prose-invert max-w-none text-white">
+        {item.overview && item.overview.map((block) => <p>{block.children[0]?.text}</p>)}
+      </section>
+
+      {item.caseStudy ? (
+        <div class="mt-10">
+          <a href={`/case-studies/${item.caseStudy.slug.current}`} class="text-emerald-300 font-semibold">Read case study →</a>
+        </div>
+      ) : null}
+    </article>
+  </main>
+</BaseLayout>

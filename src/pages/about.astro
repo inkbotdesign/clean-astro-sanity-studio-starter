@@ -1,0 +1,63 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { sanityClient } from "../lib/sanity";
+
+const about = await sanityClient.fetch(`*[_type == "aboutPage"][0]{
+  title,
+  mission,
+  vision,
+  values,
+  team[]{ name, role, bio, avatar },
+  history,
+}`);
+---
+
+<BaseLayout title="About — Inkbot Design" description="Learn about Inkbot Design's mission and team.">
+  <main class="container mx-auto py-20 px-4 sm:px-6">
+    <header class="mb-12 text-center">
+      <p class="text-sm font-semibold uppercase tracking-wider text-emerald-300">About</p>
+      <h1 class="mt-4 text-4xl md:text-5xl font-bold">{about?.title ?? "About Inkbot Design"}</h1>
+      <p class="mt-4 text-lg text-zinc-300">{about?.mission ?? "We create ideas worth rallying around."}</p>
+    </header>
+
+    <section class="mb-12 grid gap-8 lg:grid-cols-2">
+      <div>
+        <h2 class="text-2xl font-bold text-white">Mission</h2>
+        <p class="mt-3 text-zinc-300">{about?.mission ?? "We align business and brand around a single transformative idea."}</p>
+      </div>
+      <div>
+        <h2 class="text-2xl font-bold text-white">Vision</h2>
+        <p class="mt-3 text-zinc-300">{about?.vision ?? "To be the leading agency where strategy and creativity meet intentional growth."}</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-white">Core values</h2>
+      <ul class="mt-4 grid gap-3 md:grid-cols-3 text-zinc-300">
+        {(about?.values ?? ["Clarity", "Courage", "Collaboration"]).map((value) => (
+          <li key={value} class="rounded-xl border border-zinc-800 bg-zinc-900/60 p-4">{value}</li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-white">Our team</h2>
+      <div class="mt-6 grid gap-6 md:grid-cols-2">
+        {(about?.team ?? []).map((member) => (
+          <div key={member.name} class="card p-6">
+            <p class="text-xl font-semibold text-white">{member.name}</p>
+            <p class="text-sm font-medium text-emerald-300">{member.role}</p>
+            <p class="mt-3 text-zinc-300">{member.bio}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-bold text-white">Company history</h2>
+      <div class="mt-4 prose prose-invert text-white">
+        {about?.history?.map((block) => <p>{block.children[0]?.text}</p>)}
+      </div>
+    </section>
+  </main>
+</BaseLayout>

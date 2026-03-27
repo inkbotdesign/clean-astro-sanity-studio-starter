@@ -1,0 +1,42 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { sanityClient } from "../lib/sanity";
+
+const portfolio = await sanityClient.fetch(`*[_type == "portfolioItem"] | order(_createdAt desc){
+  title,
+  slug,
+  clientName,
+  category,
+  summary,
+  coverImage,
+}`);
+---
+
+<BaseLayout title="Work — Inkbot Design" description="Selected portfolio and case studies.">
+  <main class="container mx-auto py-20 px-4 sm:px-6">
+    <header class="mb-12 text-center">
+      <p class="text-sm font-semibold uppercase tracking-wider text-emerald-300">Selected Work</p>
+      <h1 class="mt-4 text-4xl md:text-6xl font-bold">Case studies that shift perception</h1>
+      <p class="mt-4 text-lg text-zinc-300 max-w-3xl mx-auto">The work we choose speaks to the transformative outcomes we deliver.</p>
+    </header>
+
+    <div class="grid gap-8 lg:grid-cols-3">
+      {portfolio.map((project) => (
+        <a key={project.slug.current} href={`/portfolio/${project.slug.current}`} class="card overflow-hidden hover:shadow-soft transition-shadow">
+          {project.coverImage?.asset?._ref ? (
+            <img
+              src={`https://cdn.sanity.io/images/${import.meta.env.PUBLIC_SANITY_PROJECT_ID}/${import.meta.env.PUBLIC_SANITY_DATASET}/${project.coverImage.asset._ref}`}
+              alt={project.title}
+              class="h-44 w-full object-cover"
+            />
+          ) : null}
+          <div class="p-6">
+            <p class="text-sm text-emerald-400 uppercase tracking-wide">{project.category ?? project.clientName}</p>
+            <h2 class="mt-2 text-2xl font-bold text-white">{project.title}</h2>
+            <p class="mt-3 text-zinc-300">{project.summary}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </main>
+</BaseLayout>

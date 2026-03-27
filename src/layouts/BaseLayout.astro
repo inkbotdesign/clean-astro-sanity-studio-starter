@@ -23,6 +23,42 @@ const {
     <title>{title}</title>
   </head>
   <body class="min-h-screen bg-zinc-950 text-zinc-50 antialiased">
+    <header class="border-b border-zinc-800 bg-zinc-950/80 backdrop-blur-md sticky top-0 z-50">
+      <div class="container mx-auto flex items-center justify-between py-4 px-4 sm:px-6">
+        <a href="/" class="text-xl font-bold tracking-tight text-white">Inkbot Design</a>
+        <nav class="flex items-center gap-4 text-sm font-medium text-zinc-200">
+          <a class="hover:text-emerald-300" href="/portfolio">Work</a>
+          <a class="hover:text-emerald-300" href="/services">Services</a>
+          <a class="hover:text-emerald-300" href="/about">About</a>
+          <a class="hover:text-emerald-300" href="/blog">Insights</a>
+          <a class="rounded-full border border-emerald-300 px-4 py-2 text-emerald-300 hover:bg-emerald-300/20" href="/contact">Contact</a>
+        </nav>
+      </div>
+    </header>
     <slot />
+    <footer class="border-t border-zinc-800 bg-zinc-950/95 py-10">
+      <div class="container mx-auto grid gap-8 md:grid-cols-3 px-4 sm:px-6">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-wider text-emerald-400">Inkbot Design</p>
+          <p class="mt-3 text-sm text-zinc-400">A strategic branding agency guiding teams to build iconic brand ideas and scalable systems.</p>
+        </div>
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-wider text-zinc-300">Quick links</p>
+          <ul class="mt-3 space-y-2 text-sm text-zinc-400">
+            <li><a class="hover:text-white" href="/">Home</a></li>
+            <li><a class="hover:text-white" href="/services">Services</a></li>
+            <li><a class="hover:text-white" href="/portfolio">Work</a></li>
+            <li><a class="hover:text-white" href="/about">About</a></li>
+            <li><a class="hover:text-white" href="/blog">Insights</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-wider text-zinc-300">Contact</p>
+          <p class="mt-3 text-sm text-zinc-400">hello@inkbotdesign.com</p>
+          <p class="text-sm text-zinc-400">+1 (555) 123-4567</p>
+        </div>
+      </div>
+      <div class="mt-8 text-center text-xs text-zinc-500">© {new Date().getFullYear()} Inkbot Design. All rights reserved.</div>
+    </footer>
   </body>
 </html>

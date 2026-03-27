@@ -1,0 +1,50 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { sanityClient } from "../../lib/sanity";
+
+const { slug } = Astro.params;
+const caseStudy = await sanityClient.fetch(`*[_type == "caseStudy" && slug.current == $slug][0]{
+  title,
+  challenge,
+  solution,
+  results,
+  keyMetrics,
+  mainImage,
+  portfolioItem->{title},
+}`, { slug });
+
+if (!caseStudy) {
+  throw new Error(`Case study not found: ${slug}`);
+}
+---
+
+<BaseLayout title={`${caseStudy.title} — Inkbot Case Study`} description={`Case study: ${caseStudy.title}`}>
+  <main class="container mx-auto py-20 px-4 sm:px-6">
+    <article class="space-y-8">
+      <h1 class="text-5xl font-bold text-white">{caseStudy.title}</h1>
+      <p class="text-lg text-emerald-300">{caseStudy.portfolioItem?.title ?? "Brand engagement"}</p>
+      {caseStudy.mainImage?.asset?._ref ? (
+        <img src={`https://cdn.sanity.io/images/${import.meta.env.PUBLIC_SANITY_PROJECT_ID}/${import.meta.env.PUBLIC_SANITY_DATASET}/${caseStudy.mainImage.asset._ref}`} alt={caseStudy.title} class="w-full h-72 object-cover rounded-xl" />
+      ) : null}
+      <section>
+        <h2 class="text-3xl font-bold text-white">Challenge</h2>
+        <div class="mt-3 prose prose-invert text-white">{caseStudy.challenge?.map((b) => <p>{b.children[0]?.text}</p>)}</div>
+      </section>
+      <section>
+        <h2 class="text-3xl font-bold text-white">Solution</h2>
+        <div class="mt-3 prose prose-invert text-white">{caseStudy.solution?.map((b) => <p>{b.children[0]?.text}</p>)}</div>
+      </section>
+      <section>
+        <h2 class="text-3xl font-bold text-white">Results</h2>
+        <div class="mt-3 prose prose-invert text-white">{caseStudy.results?.map((b) => <p>{b.children[0]?.text}</p>)}</div>
+      </section>
+      <section>
+        <h3 class="text-xl font-semibold text-emerald-400">Key metrics</h3>
+        <ul class="mt-3 list-disc pl-5 text-zinc-300">
+          {caseStudy.keyMetrics?.map((metric, i) => <li key={i}>{metric}</li>)}
+        </ul>
+      </section>
+      <a href="/case-studies" class="text-emerald-300 font-semibold">← Back to case studies</a>
+    </article>
+  </main>
+</BaseLayout>

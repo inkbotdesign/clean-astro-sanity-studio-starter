@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { sanityClient } from "../lib/sanity";
+
+const caseStudies = await sanityClient.fetch(`*[_type == "caseStudy"] | order(_createdAt desc){
+  title,
+  slug,
+  keyMetrics,
+  portfolioItem->{title},
+  mainImage,
+}`);
+---
+
+<BaseLayout title="Case Studies — Inkbot Design" description="Detailed case studies from top clients.">
+  <main class="container mx-auto py-20 px-4 sm:px-6">
+    <header class="mb-12 text-center">
+      <p class="text-sm font-semibold uppercase tracking-wider text-emerald-300">Case studies</p>
+      <h1 class="mt-4 text-4xl md:text-6xl font-bold">Ideas in action</h1>
+      <p class="mt-4 text-lg text-zinc-300 max-w-3xl mx-auto">Explore our client work, methodology, and measurable outcomes.</p>
+    </header>
+    <div class="grid gap-8 lg:grid-cols-3">
+      {caseStudies.map((study) => (
+        <a key={study.slug.current} href={`/case-studies/${study.slug.current}`} class="card overflow-hidden hover:shadow-soft transition-shadow">
+          {study.mainImage?.asset?._ref ? (
+            <img src={`https://cdn.sanity.io/images/${import.meta.env.PUBLIC_SANITY_PROJECT_ID}/${import.meta.env.PUBLIC_SANITY_DATASET}/${study.mainImage.asset._ref}`} alt={study.title} class="h-48 w-full object-cover" />
+          ) : null}
+          <div class="p-6">
+            <p class="text-sm text-emerald-400 uppercase tracking-wide">{study.portfolioItem?.title ?? "Case study"}</p>
+            <h2 class="mt-2 text-2xl font-bold text-white">{study.title}</h2>
+            <p class="mt-3 text-zinc-300">{study.keyMetrics?.slice(0, 2).join(" • ")}</p>
+            <p class="mt-4 text-emerald-300 font-semibold">Read story →</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </main>
+</BaseLayout>
