@@ -1,6 +1,6 @@
 ﻿---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { sanityClient } from "../lib/sanity";
+import { sanityClient, urlFor } from "../lib/sanity";
 
 const home = await sanityClient.fetch(`*[_type == "homePage"][0]{
   title,
@@ -70,7 +70,7 @@ const recentPosts = await sanityClient.fetch(`*[_type == "blogPost"] | order(pub
       <div class="grid gap-4 lg:grid-cols-3">
         {(caseStudies ?? []).map((study) => (
           <article key={study.slug.current} class="card overflow-hidden">
-            <img src={study.mainImage?.asset?._ref ? `https://cdn.sanity.io/images/${import.meta.env.PUBLIC_SANITY_PROJECT_ID}/${import.meta.env.PUBLIC_SANITY_DATASET}/${study.mainImage.asset._ref}` : ""} alt={study.title} class="h-40 w-full object-cover" />
+            <img src={study.mainImage ? urlFor(study.mainImage).width(1200).height(640).auto("format").url() : ""} alt={study.title} class="h-40 w-full object-cover" />
             <div class="p-5">
               <p class="text-xs uppercase tracking-wider text-emerald-300">{study.portfolioItem?.title ?? "Case study"}</p>
               <h3 class="mt-2 text-xl font-semibold text-white">{study.title}</h3>

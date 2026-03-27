@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { sanityClient } from "../lib/sanity";
+import { sanityClient, urlFor } from "../lib/sanity";
 
 const portfolio = await sanityClient.fetch(`*[_type == "portfolioItem"] | order(_createdAt desc){
   title,
@@ -23,9 +23,9 @@ const portfolio = await sanityClient.fetch(`*[_type == "portfolioItem"] | order(
     <div class="grid gap-8 lg:grid-cols-3">
       {portfolio.map((project) => (
         <a key={project.slug.current} href={`/portfolio/${project.slug.current}`} class="card overflow-hidden hover:shadow-soft transition-shadow">
-          {project.coverImage?.asset?._ref ? (
+          {project.coverImage ? (
             <img
-              src={`https://cdn.sanity.io/images/${import.meta.env.PUBLIC_SANITY_PROJECT_ID}/${import.meta.env.PUBLIC_SANITY_DATASET}/${project.coverImage.asset._ref}`}
+              src={urlFor(project.coverImage).width(1600).height(880).auto("format").url()}
               alt={project.title}
               class="h-44 w-full object-cover"
             />

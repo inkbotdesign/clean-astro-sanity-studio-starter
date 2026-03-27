@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { sanityClient } from "../../lib/sanity";
+import { sanityClient, urlFor } from "../../lib/sanity";
 
 const { slug } = Astro.params;
 const item = await sanityClient.fetch(`*[_type == "portfolioItem" && slug.current == $slug][0]{
@@ -23,8 +23,8 @@ if (!item) {
     <article>
       <h1 class="text-5xl font-bold text-white">{item.title}</h1>
       <p class="mt-2 text-lg text-emerald-300">{item.clientName} · {item.category}</p>
-      {item.coverImage?.asset?._ref ? (
-        <img src={`https://cdn.sanity.io/images/${import.meta.env.PUBLIC_SANITY_PROJECT_ID}/${import.meta.env.PUBLIC_SANITY_DATASET}/${item.coverImage.asset._ref}`} alt={item.title} class="mt-8 w-full rounded-xl object-cover" />
+      {item.coverImage ? (
+        <img src={urlFor(item.coverImage).width(1600).height(880).auto("format").url()} alt={item.title} class="mt-8 w-full rounded-xl object-cover" />
       ) : null}
 
       <section class="mt-10 prose prose-invert max-w-none text-white">
