@@ -7,7 +7,7 @@ import sanity from "@sanity/astro";
 import react from "@astrojs/react";
 import { requireEnv } from "./src/lib/env";
 
-import vercel from "@astrojs/vercel";
+import cloudflare from "@astrojs/cloudflare";
 
 const { PUBLIC_SANITY_PROJECT_ID, PUBLIC_SANITY_DATASET } = loadEnv(
   process.env.NODE_ENV ?? "development",
@@ -29,7 +29,7 @@ const sanityDataset = requireEnv(
 // https://astro.build/config
 export default defineConfig({
   output: "server",
-  adapter: vercel(),
+  adapter: cloudflare(),
   integrations: [
     sanity({
       projectId: sanityProjectId,
