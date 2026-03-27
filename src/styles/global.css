@@ -1,1 +1,156 @@
 @import "tailwindcss";
+
+:root {
+  --color-bg: #070b10;
+  --color-surface: #101827;
+  --color-surface-2: #131f34;
+  --color-primary: #38bdf8;
+  --color-primary-strong: #22d3ee;
+  --color-accent: #34d399;
+  --color-muted: #94a3b8;
+  --color-text: #e2e8f0;
+  --color-heading: #f8fafc;
+  --color-border: rgba(148, 163, 184, 0.16);
+  --radius: 1.25rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at 20% 15%, rgba(56, 189, 248, 0.12), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(52, 211, 153, 0.1), transparent 35%),
+    linear-gradient(170deg, var(--color-bg), #04070d);
+  color: var(--color-text);
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+a:hover,
+button:hover {
+  color: var(--color-primary-strong);
+  transform: translateY(-1px);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--color-heading);
+  margin: 0;
+  line-height: 1.2;
+}
+
+p,
+ul,
+ol,
+figure {
+  margin: 0;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.container {
+  width: min(100% - 2rem, 1100px);
+  margin: 0 auto;
+}
+
+.section {
+  padding: 4.5rem 0;
+}
+
+.card {
+  background: rgba(16, 24, 39, 0.72);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(12px);
+}
+
+.shadow-soft {
+  box-shadow: 0 18px 30px rgba(9, 32, 60, 0.32);
+}
+
+.primary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.8rem 1.4rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: linear-gradient(120deg, var(--color-primary), var(--color-accent));
+  color: #031619;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 20px rgba(56, 189, 248, 0.22);
+}
+
+.gradient-text {
+  background: linear-gradient(100deg, #81e6d9, #38bdf8, #a5b4fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bordered {
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 1.25rem;
+}
+
+.code {
+  font-family: "Fira Code", "JetBrains Mono", Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    width: min(100% - 1.5rem, 1000px);
+  }
+
+  .section {
+    padding: 3rem 0;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --radius: 1rem;
+  }
+
+  .section {
+    padding: 2rem 0;
+  }
+
+  .primary-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
