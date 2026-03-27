@@ -118,6 +118,7 @@ img {
 .gradient-text {
   background: linear-gradient(100deg, #81e6d9, #38bdf8, #a5b4fc);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
