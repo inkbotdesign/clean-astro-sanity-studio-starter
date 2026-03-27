@@ -17,11 +17,13 @@ const { PUBLIC_SANITY_PROJECT_ID, PUBLIC_SANITY_DATASET } = loadEnv(
 
 const sanityProjectId = requireEnv(
   "PUBLIC_SANITY_PROJECT_ID",
-  PUBLIC_SANITY_PROJECT_ID,
+  PUBLIC_SANITY_PROJECT_ID || process.env.PUBLIC_SANITY_PROJECT_ID,
+  "vsozkoub",
 );
 const sanityDataset = requireEnv(
   "PUBLIC_SANITY_DATASET",
-  PUBLIC_SANITY_DATASET,
+  PUBLIC_SANITY_DATASET || process.env.PUBLIC_SANITY_DATASET,
+  "production",
 );
 
 // https://astro.build/config
