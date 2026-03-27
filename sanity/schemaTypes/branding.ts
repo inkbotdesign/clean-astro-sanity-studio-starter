@@ -23,7 +23,7 @@ export const serviceType = defineType({
     defineField({ name: "summary", title: "Summary", type: "text", validation: (rule) => rule.required() }),
     defineField({ name: "description", title: "Description", type: "array", of: [{ type: "block" }] }),
     defineField({ name: "coverImage", title: "Cover Image", type: "image", options: { hotspot: true } }),
-    defineField({ name: "subServices", title: "Sub-services", type: "array", of: [{ type: "subService" }], validation: (rule) => rule.unique()) }),
+    defineField({ name: "subServices", title: "Sub-services", type: "array", of: [{ type: "subService" }], validation: (rule) => rule.unique() }),
   ],
   preview: { select: { title: "title", subtitle: "summary" } },
 });
